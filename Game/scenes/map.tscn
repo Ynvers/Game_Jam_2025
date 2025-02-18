@@ -1,8 +1,83 @@
-[gd_scene load_steps=2 format=3 uid="uid://cayipnpewfcqb"]
+[gd_scene load_steps=8 format=3 uid="uid://cayipnpewfcqb"]
 
-[ext_resource type="Texture2D" uid="uid://bi0fed6dktiq2" path="res://assets/icon.svg" id="1_44rwd"]
+[ext_resource type="Texture2D" uid="uid://citwuvovhcmq1" path="res://assets/Benin-Satellite-Map.webp" id="1_6drcl"]
+[ext_resource type="Texture2D" uid="uid://bi0fed6dktiq2" path="res://assets/icon.svg" id="2_7ahun"]
+[ext_resource type="Script" path="res://scripts/Player_main.gd" id="2_einge"]
+[ext_resource type="Script" path="res://scripts/Joystick.gd" id="4_aggs1"]
+[ext_resource type="Script" path="res://scripts/niveau1.gd" id="5_74mim"]
 
-[node name="Sprite2D" type="Sprite2D"]
-position = Vector2(260.5, 170)
-scale = Vector2(3.80469, 2.67188)
-texture = ExtResource("1_44rwd")
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fbd66"]
+radius = 31.0
+height = 80.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_62jet"]
+radius = 75.4255
+
+[node name="Map" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -7.0
+offset_top = 12.0
+offset_right = 1156.0
+offset_bottom = 661.0
+
+[node name="AssetMap" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 1346.0
+offset_top = -184.0
+offset_right = 2206.0
+offset_bottom = 1346.0
+rotation = 1.5708
+texture = ExtResource("1_6drcl")
+
+[node name="Player_main" type="CharacterBody2D" parent="." groups=["Players"]]
+position = Vector2(280, 164)
+script = ExtResource("2_einge")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player_main"]
+position = Vector2(8, -2)
+shape = SubResource("CapsuleShape2D_fbd66")
+
+[node name="AssetPlayer" type="Sprite2D" parent="Player_main"]
+z_index = 10
+position = Vector2(8, -2)
+scale = Vector2(0.445312, 0.539062)
+texture = ExtResource("2_7ahun")
+
+[node name="Joystick" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_aggs1")
+
+[node name="Base" type="TextureRect" parent="Joystick"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Handle" type="TextureRect" parent="Joystick"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Niveaux" type="Node2D" parent="."]
+position = Vector2(80, 60)
+
+[node name="Niveau1" type="Area2D" parent="Niveaux" groups=["Niveaux"]]
+position = Vector2(698, 286)
+script = ExtResource("5_74mim")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Niveaux/Niveau1"]
+shape = SubResource("CircleShape2D_62jet")
+
+[node name="niveau2body" type="Sprite2D" parent="Niveaux/Niveau1"]
+texture = ExtResource("2_7ahun")
+
+[node name="FeedBack" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 147.0
+offset_right = 454.0
+offset_bottom = 331.0
+
+[connection signal="body_entered" from="Niveaux/Niveau1" to="Niveaux/Niveau1" method="_on_body_entered"]
