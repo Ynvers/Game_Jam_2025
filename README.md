@@ -1,4 +1,6 @@
 # 🎮 Game Jam 2025
+Le code final se trouve sur la branche **final**
+
 
 ## 📜 Synopsis
 
@@ -27,4 +29,3 @@ Ils explorent et appliquent leurs connaissances dans plusieurs domaines scientif
 - 🧫 **Chimie**
 
 L'objectif final est de résoudre tous les défis pour obtenir la **"🗝️ Clé du Savoir"**, un artefact légendaire capable de ramener les divinités à leur état normal. ✨
-
