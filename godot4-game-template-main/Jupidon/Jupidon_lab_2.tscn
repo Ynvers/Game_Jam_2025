@@ -1,0 +1,135 @@
+[gd_scene load_steps=15 format=3 uid="uid://hjstgmj344j0"]
+
+[ext_resource type="Texture2D" uid="uid://bs77t0jn5kxbj" path="res://Jupidon/Sample.png" id="1_c5d27"]
+[ext_resource type="Script" path="res://Jupidon/CharacterBody2D.gd" id="1_ufuuw"]
+[ext_resource type="Texture2D" uid="uid://doi26r4fev2u4" path="res://Jupidon/icon.svg" id="2_aax3l"]
+[ext_resource type="Script" path="res://Jupidon/couple.gd" id="4_ipdb3"]
+[ext_resource type="Script" path="res://Jupidon/wall.gd" id="5_k83xd"]
+[ext_resource type="Script" path="res://Jupidon/Arbre fètiche.gd" id="6_67qf0"]
+[ext_resource type="Script" path="res://Jupidon/dame_de_la_cantine.gd" id="6_psscu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6qyck"]
+radius = 17.0
+height = 40.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_48nfc"]
+radius = 52.9245
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pyr2a"]
+radius = 43.0116
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2u1dr"]
+size = Vector2(129, 862.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ut7vp"]
+size = Vector2(408, 876.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8wgki"]
+size = Vector2(1522, 98)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sqjvi"]
+size = Vector2(1268, 87)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1147.0
+offset_bottom = 644.0
+texture = ExtResource("1_c5d27")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(1109, 598)
+collision_mask = 2
+script = ExtResource("1_ufuuw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CapsuleShape2D_6qyck")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+scale = Vector2(0.273437, 0.25)
+texture = ExtResource("2_aax3l")
+
+[node name="DialogueBox" type="RichTextLabel" parent="."]
+offset_left = 127.0
+offset_top = 41.0
+offset_right = 997.0
+offset_bottom = 124.0
+text = "Un féticheur jaloux a gbassé deux amoureux en les empêchant de s’approcher. Pour lever ce sort, tu dois produire du dioxyde de carbone en mélangeant de du vinaigre et de la bicarboante disponibles sur la map. Dirige le gaz vers eux avant que la malédiction ne devienne irréversible !
+
+Vas à la rencontre des habitants et retrouve les ingrédients en faisant attention à ne prendre des éléments innatendus"
+scroll_following = true
+tab_size = 15
+
+[node name="couple" type="Area2D" parent="."]
+position = Vector2(139, 303)
+script = ExtResource("4_ipdb3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="couple"]
+position = Vector2(8, 6)
+shape = SubResource("CircleShape2D_48nfc")
+
+[node name="Dame de la cantine" type="Area2D" parent="."]
+position = Vector2(1064, 109)
+script = ExtResource("6_psscu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dame de la cantine"]
+position = Vector2(-16, 182)
+shape = SubResource("CircleShape2D_pyr2a")
+
+[node name="Label" type="Label" parent="Dame de la cantine"]
+offset_left = -98.0
+offset_top = 97.0
+offset_right = 88.0
+offset_bottom = 139.0
+text = "La dame de la cantine"
+
+[node name="Arbre fètiche" type="Area2D" parent="."]
+position = Vector2(453, 162)
+script = ExtResource("6_67qf0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arbre fètiche"]
+position = Vector2(-8, 282)
+shape = SubResource("CircleShape2D_pyr2a")
+
+[node name="Label" type="Label" parent="Arbre fètiche"]
+offset_left = -108.0
+offset_top = 189.0
+offset_right = 78.0
+offset_bottom = 231.0
+text = "l'arbre fetiche"
+
+[node name="Button" type="Button" parent="."]
+offset_left = 27.0
+offset_top = 524.0
+offset_right = 255.0
+offset_bottom = 618.0
+
+[node name="IngredientsListe" type="Label" parent="."]
+offset_left = 12.0
+offset_top = 140.0
+offset_right = 357.0
+offset_bottom = 246.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+script = ExtResource("5_k83xd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-61.5, 305.75)
+shape = SubResource("RectangleShape2D_2u1dr")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1350, 334.75)
+shape = SubResource("RectangleShape2D_ut7vp")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(495, -48)
+shape = SubResource("RectangleShape2D_8wgki")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(586, 692)
+shape = SubResource("RectangleShape2D_sqjvi")
+
+[connection signal="body_entered" from="couple" to="couple" method="_on_body_entered"]
+[connection signal="body_entered" from="Dame de la cantine" to="Dame de la cantine" method="_on_body_entered"]
+[connection signal="body_entered" from="Arbre fètiche" to="Arbre fètiche" method="_on_body_entered"]

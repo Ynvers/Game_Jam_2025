@@ -1,0 +1,99 @@
+[gd_scene load_steps=6 format=3 uid="uid://colcb8py2nmvi"]
+
+[ext_resource type="PackedScene" uid="uid://dc8502ujwrbo6" path="res://Egoungoun/player.tscn" id="1_8r6da"]
+[ext_resource type="Script" path="res://Egoungoun/survivor_scene.gd" id="1_h4aph"]
+[ext_resource type="PackedScene" uid="uid://ca2l8jdrd4xy3" path="res://Egoungoun/pine_tree.tscn" id="2_5g7l7"]
+
+[sub_resource type="Curve2D" id="Curve2D_7tn3o"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -9922, -5648, 0, 0, 0, 0, -9967, 5620, 0, 0, 0, 0, 10895, 5937, 0, 0, 0, 0, 10850, -5920, 0, 0, 0, 0, -9922, -5648)
+}
+point_count = 5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kaalo"]
+radius = 150.615
+
+[node name="Game" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_h4aph")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -30
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+modulate = Color(1, 0.996078, 0.984314, 1)
+offset_left = -9228.0
+offset_top = -4798.0
+offset_right = 9879.0
+offset_bottom = -4322.0
+scale = Vector2(0.962533, 20.2178)
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_7tn3o")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+unique_name_in_owner = true
+position = Vector2(-9922, -5648)
+rotation = 1.57479
+
+[node name="player" parent="." groups=["Players"] instance=ExtResource("1_8r6da")]
+position = Vector2(977, 537)
+
+[node name="PineTree" parent="." instance=ExtResource("2_5g7l7")]
+position = Vector2(838, 613)
+
+[node name="PineTree5" parent="." instance=ExtResource("2_5g7l7")]
+position = Vector2(838, 613)
+
+[node name="PineTree6" parent="." instance=ExtResource("2_5g7l7")]
+position = Vector2(794, 391)
+
+[node name="PineTree2" parent="." instance=ExtResource("2_5g7l7")]
+position = Vector2(1320, 349)
+
+[node name="PineTree3" parent="." instance=ExtResource("2_5g7l7")]
+position = Vector2(1433, 275)
+
+[node name="PineTree4" parent="." instance=ExtResource("2_5g7l7")]
+position = Vector2(576, 447)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="gameover" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="gameover"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.505882)
+
+[node name="Label" type="Label" parent="gameover/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.502
+anchor_bottom = 0.5
+offset_left = -157.0
+offset_top = -38.0
+offset_right = 159.16
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 70
+text = "GAME OVER"
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(2357, 808)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_kaalo")
+
+[connection signal="health_depleted" from="player" to="." method="_on_player_health_depleted"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

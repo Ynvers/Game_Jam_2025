@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://dc8502ujwrbo6"]
+
+[ext_resource type="Script" path="res://Egoungoun/player.gd" id="1_1y1ym"]
+[ext_resource type="PackedScene" uid="uid://pbmyh1qru7p" path="res://Egoungoun/happy_boo.tscn" id="1_q4078"]
+[ext_resource type="PackedScene" uid="uid://dodwssi7mtyk0" path="res://Egoungoun/gun.tscn" id="3_emfju"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qxt5m"]
+radius = 30.0167
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w8pc7"]
+radius = 36.0694
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4y4y6"]
+bg_color = Color(0.0253638, 0.0253638, 0.0253638, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ahy22"]
+bg_color = Color(0.262745, 0.705882, 0.211765, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_1y1ym")
+
+[node name="HappyBoo" parent="." instance=ExtResource("1_q4078")]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -9)
+shape = SubResource("CircleShape2D_qxt5m")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="gun" parent="." instance=ExtResource("3_emfju")]
+position = Vector2(2, -31)
+
+[node name="hurtbox" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_w8pc7")
+debug_color = Color(0.952434, 0.200446, 0.232217, 0.42)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -77.0
+offset_top = -126.0
+offset_right = 68.0
+offset_bottom = -115.0
+theme_override_styles/background = SubResource("StyleBoxFlat_4y4y6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ahy22")
+value = 100.0
+show_percentage = false
